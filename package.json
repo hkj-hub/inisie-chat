@@ -1,0 +1,12 @@
+{
+  "name": "inisie-chat",
+  "private": true,
+  "workspaces": [
+    "apps/backend",
+    "apps/frontend",
+    "packages/shared"
+  ],
+  "scripts": {
+    "build": "npm run build --workspaces --if-present"
+  }
+}
