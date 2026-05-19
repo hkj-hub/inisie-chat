@@ -5,7 +5,8 @@
   "scripts": {
     "dev": "vite",
     "build": "vue-tsc && vite build",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "test": "vitest"
   },
   "dependencies": {
     "@inisie-chat/shared": "*",
@@ -17,6 +18,7 @@
     "@vitejs/plugin-vue": "latest",
     "typescript": "latest",
     "vite": "^6.0.0",
+    "vitest": "latest",
     "vue-tsc": "latest"
   }
 }
