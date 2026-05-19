@@ -1,0 +1,22 @@
+{
+  "name": "@inisie-chat/backend",
+  "version": "0.0.1",
+  "type": "module",
+  "scripts": {
+    "dev": "node --watch --experimental-transform-types src/index.ts",
+    "test": "vitest run",
+    "build": "tsc"
+  },
+  "dependencies": {
+    "@hono/zod-validator": "latest",
+    "@inisie-chat/shared": "*",
+    "csv-parse": "latest",
+    "csv-stringify": "latest",
+    "hono": "latest"
+  },
+  "devDependencies": {
+    "@types/node": "latest",
+    "typescript": "latest",
+    "vitest": "latest"
+  }
+}
