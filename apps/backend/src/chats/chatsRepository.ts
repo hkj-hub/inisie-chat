@@ -1,9 +1,10 @@
 import fs from 'node:fs/promises'
 import path from 'node:path'
 import type { ChatEntry } from '@inisie-chat/shared'
-import { parseCsv, stringifyCsv } from '../shared/csv.js'
+import { parseCsv, stringifyCsvRow, stringifyCsvFull } from '../shared/csv.js'
 
-const CSV_COLUMNS: (keyof ChatEntry)[] = ['timestamp', 'name', 'color', 'message']
+const CSV_COLUMNS = ['timestamp', 'name', 'color', 'message'] as const
+const CSV_HEADER = CSV_COLUMNS.join(',') + '\n'
 const MAX_CHAT_ROWS = 20
 
 function getChatCsvPath(): string {
@@ -19,7 +20,7 @@ async function ensureFile(filePath: string): Promise<void> {
   try {
     await fs.access(filePath)
   } catch {
-    await fs.writeFile(filePath, '', 'utf-8')
+    await fs.writeFile(filePath, CSV_HEADER, 'utf-8')
   }
 }
 
@@ -28,7 +29,7 @@ export const chatsRepository = {
     const chatPath = getChatCsvPath()
     await ensureFile(chatPath)
     const content = await fs.readFile(chatPath, 'utf-8')
-    return parseCsv<ChatEntry>(content, CSV_COLUMNS)
+    return parseCsv<ChatEntry>(content)
   },
 
   async append(entry: ChatEntry): Promise<void> {
@@ -38,18 +39,16 @@ export const chatsRepository = {
     await ensureFile(chatPath)
     await ensureFile(logPath)
 
-    const line = stringifyCsv([entry])
+    const line = stringifyCsvRow(entry)
 
-    // Append to log.csv (unlimited)
     await fs.appendFile(logPath, line, 'utf-8')
 
-    // Append to chat.csv then trim to MAX_CHAT_ROWS
     await fs.appendFile(chatPath, line, 'utf-8')
     const content = await fs.readFile(chatPath, 'utf-8')
-    const all = parseCsv<ChatEntry>(content, CSV_COLUMNS)
+    const all = parseCsv<ChatEntry>(content)
     if (all.length > MAX_CHAT_ROWS) {
       const trimmed = all.slice(all.length - MAX_CHAT_ROWS)
-      await fs.writeFile(chatPath, stringifyCsv(trimmed), 'utf-8')
+      await fs.writeFile(chatPath, stringifyCsvFull(trimmed, CSV_COLUMNS), 'utf-8')
     }
   },
 }
