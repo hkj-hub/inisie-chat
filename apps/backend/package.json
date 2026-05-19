@@ -3,11 +3,12 @@
   "version": "0.0.1",
   "type": "module",
   "scripts": {
-    "dev": "node --watch --experimental-transform-types src/index.ts",
+    "dev": "tsx watch src/index.ts",
     "test": "vitest run",
     "build": "tsc"
   },
   "dependencies": {
+    "@hono/node-server": "latest",
     "@hono/zod-validator": "latest",
     "@inisie-chat/shared": "*",
     "csv-parse": "latest",
@@ -16,6 +17,7 @@
   },
   "devDependencies": {
     "@types/node": "latest",
+    "tsx": "latest",
     "typescript": "latest",
     "vitest": "latest"
   }

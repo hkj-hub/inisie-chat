@@ -1,3 +1,4 @@
+import { serve } from '@hono/node-server'
 import { Hono } from 'hono'
 import { cors } from 'hono/cors'
 import type { ContentfulStatusCode } from 'hono/utils/http-status'
@@ -20,8 +21,6 @@ app.onError((err, c) => {
 })
 
 const port = Number(process.env.PORT ?? 3000)
-
-export default {
-  port,
-  fetch: app.fetch,
-}
+serve({ fetch: app.fetch, port }, () => {
+  console.log(`Server running on http://localhost:${port}`)
+})
