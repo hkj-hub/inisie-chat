@@ -1,6 +1,6 @@
 import { Hono } from 'hono'
 import { cors } from 'hono/cors'
-import type { StatusCode } from 'hono/utils/http-status'
+import type { ContentfulStatusCode } from 'hono/utils/http-status'
 import { ApiError } from './shared/errors.js'
 import { chatsHandler } from './chats/handler.js'
 import { logsHandler } from './logs/handler.js'
@@ -14,7 +14,7 @@ app.route('/', logsHandler)
 
 app.onError((err, c) => {
   if (err instanceof ApiError) {
-    return c.json({ error: { code: err.code, message: err.message } }, err.status as StatusCode)
+    return c.json({ error: { code: err.code, message: err.message } }, err.status as ContentfulStatusCode)
   }
   return c.json({ error: { code: 'internal_error', message: 'Internal server error' } }, 500)
 })
