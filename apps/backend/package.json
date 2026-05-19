@@ -1,0 +1,24 @@
+{
+  "name": "@inisie-chat/backend",
+  "version": "0.0.1",
+  "type": "module",
+  "scripts": {
+    "dev": "tsx watch src/index.ts",
+    "test": "vitest run",
+    "build": "tsc"
+  },
+  "dependencies": {
+    "@hono/node-server": "latest",
+    "@hono/zod-validator": "latest",
+    "@inisie-chat/shared": "*",
+    "csv-parse": "latest",
+    "csv-stringify": "latest",
+    "hono": "latest"
+  },
+  "devDependencies": {
+    "@types/node": "latest",
+    "tsx": "latest",
+    "typescript": "latest",
+    "vitest": "latest"
+  }
+}

@@ -92,9 +92,9 @@ describe('getChats', () => {
 ## 8. ローカルでの実行
 
 ```bash
-bun run test      # Vitest
-bun run e2e       # Playwright E2E + VRT
-bun run lint      # ESLint + 型チェック
+npm run test      # Vitest
+npm run e2e       # Playwright E2E + VRT
+npm run lint      # ESLint + 型チェック
 ```
 
 ## 9. カバレッジ
