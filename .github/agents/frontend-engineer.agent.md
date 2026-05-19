@@ -72,8 +72,8 @@ description: Vue.js + TypeScript の WebChat フロントエンド（apps/fronte
 - キーボード操作:
 
 ## 実行コマンドと結果
-- bun run lint
-- bun run build
+- npm run lint
+- npm run build
 ```
 
 ## 守ること
