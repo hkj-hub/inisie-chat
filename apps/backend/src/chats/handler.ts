@@ -12,8 +12,16 @@ chatsHandler.get('/api/chats', async (c) => {
   return c.json({ data: result })
 })
 
-chatsHandler.post('/api/chats', zValidator('json', postChatBodySchema), async (c) => {
+chatsHandler.post(
+  '/api/chats',
+  zValidator('json', postChatBodySchema, (result, c) => {
+    if (!result.success) {
+      return c.json({ error: { code: 'validation_error', message: 'Request validation failed' } }, 422)
+    }
+  }),
+  async (c) => {
   const body = c.req.valid('json')
   await postChat({ ...body, repo: chatsRepository })
-  return c.json({ data: null }, 201)
-})
+    return c.json({ data: null }, 201)
+  },
+)
