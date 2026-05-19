@@ -21,6 +21,7 @@
 `apps/frontend/src/features/chat/fetchChats.ts` でソートを実施する。
 API レスポンス取得後、`timestamp` の降順ソートを適用する。
 `ChatPage.vue` への変更はゼロとする。
+エントランス画面も同様に `apps/frontend/src/features/entrance/fetchChats.ts` で降順ソートを適用する。
 
 ---
 
@@ -37,6 +38,7 @@ API レスポンス取得後、`timestamp` の降順ソートを適用する。
 - ソートロジックがフィーチャーフォルダ（`features/chat/`）に閉じており、関心の分離を維持できる
 - `ChatPage.vue` を変更せずに済む
 - ログ画面は独立した `fetchLogs.ts` を持つため、ログ画面の表示順に影響しない
+- エントランス画面も同様のパターン（`features/entrance/fetchChats.ts`）で降順ソートを適用する
 
 ### 案2: `ChatPage.vue` の computed でソート（不採用）
 
@@ -52,7 +54,7 @@ API レスポンス取得後、`timestamp` の降順ソートを適用する。
 
 ## 影響範囲
 
-- **変更対象**: `apps/frontend/src/features/chat/fetchChats.ts` のみ
+- **変更対象**: `apps/frontend/src/features/chat/fetchChats.ts`、`apps/frontend/src/features/entrance/fetchChats.ts`
 - **変更なし**: `ChatPage.vue`、バックエンド、ログ画面
 
 ---
